@@ -1,5 +1,6 @@
 import 'package:flightapp/CustomShapeClipper.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MaterialApp(
   title: 'Flight List App',
@@ -230,13 +231,16 @@ var homeScreenBottomPart = Column(
 );
 
 List<CityCard> cityCards = [
-  CityCard("assets/images/lasvegas.jpg", "Las Vegas", "Feb 2019", "45", "4299", "2250"),
-  CityCard("assets/images/athens.jpg", "Athens", "Apr 2019", "50", "9999", "4159"),
-  CityCard("assets/images/sydney.jpeg", "Sidney", "Dec 2019", "40", "5999", "2399")
+  CityCard("assets/images/lasvegas.jpg", "Las Vegas", "Feb 2019", "45", 4299, 2250),
+  CityCard("assets/images/athens.jpg", "Athens", "Apr 2019", "50", 9999, 4159),
+  CityCard("assets/images/sydney.jpeg", "Sidney", "Dec 2019", "40", 5999, 2399)
 ];
 
+final formatCurrency = NumberFormat.simpleCurrency();
+
 class CityCard extends StatelessWidget {
-  final String imagePath, cityName, monthYear, discount, oldPrice, newPrice;
+  final String imagePath, cityName, monthYear, discount;
+  final int oldPrice, newPrice;
 
   CityCard(this.imagePath, this.cityName, this.monthYear, this.discount, this.oldPrice, this.newPrice);
 
@@ -305,7 +309,17 @@ class CityCard extends StatelessWidget {
               ],
             ),
           ),
-          Text("data"),
+          SizedBox(height: 5.0,),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(width: 5.0,),
+              Text('${formatCurrency.format(newPrice)}', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14.0),),
+              SizedBox(width: 5.0,),
+              Text("(${formatCurrency.format(oldPrice)})", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 12.0),),
+            ],
+          )
         ],
       ),
     );
