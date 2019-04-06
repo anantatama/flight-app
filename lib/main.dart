@@ -1,4 +1,6 @@
 import 'package:flightapp/CustomShapeClipper.dart';
+import 'package:flightapp/CustomAppBar.dart';
+import 'package:flightapp/flight_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -23,6 +25,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      bottomNavigationBar: CustomAppBar(),
       body: Column(
         children: <Widget>[
           HomeScreenTopPart(),
@@ -114,7 +117,18 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                         suffixIcon: Material(
                           elevation: 2.0,
                           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                          child: Icon(Icons.search, color: Colors.black,),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(
+                                context, 
+                                MaterialPageRoute(
+                                  builder: (context) => FlightListingScreen()));
+                            },
+                            child: Icon(
+                              Icons.search, 
+                              color: Colors.black,
+                            )
+                          ),
                         ),
                         border: InputBorder.none,
                       ),
