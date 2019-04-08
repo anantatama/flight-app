@@ -44,6 +44,8 @@ class HomeScreenTopPart extends StatefulWidget {
   _HomeScreenTopPartState createState() => _HomeScreenTopPartState();
 }
 
+final _searchFieldController = TextEditingController(text: locations[1],);
+
 class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
 
   var selectedLocationIndex = 0;
@@ -109,7 +111,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                     elevation: 5.0,
                     borderRadius: BorderRadius.all(Radius.circular(30.0)),
                     child: TextField(
-                      controller: TextEditingController(text: locations[1],),
+                      controller: _searchFieldController,
                       style: dropDownMenuItemStyle,
                       cursorColor: appTheme.primaryColor,
                       decoration: InputDecoration(
@@ -122,7 +124,14 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                               Navigator.push(
                                 context, 
                                 MaterialPageRoute(
-                                  builder: (context) => FlightListingScreen()));
+                                  builder: (context) => 
+                                    InheritedFlightListing(
+                                      fromLocation: locations[selectedLocationIndex],
+                                      toLocation: _searchFieldController.text,
+                                      child: FlightListingScreen(),
+                                    )
+                                )
+                              );
                             },
                             child: Icon(
                               Icons.search, 
