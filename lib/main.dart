@@ -160,7 +160,7 @@ class _HomeScreenTopPartState extends State<HomeScreenTopPart> {
                       ),
                     SizedBox(width: 20.0),
                     InkWell(child: ChoiceChip(
-                      Icons.hotel, "Hotels", !isFlightSelected),
+                      Icons.hotel, "Hotel", !isFlightSelected),
                       onTap: () {
                         setState(() {
                           isFlightSelected = false;
@@ -348,3 +348,5 @@ class CityCard extends StatelessWidget {
     );
   }
 }
+
+
